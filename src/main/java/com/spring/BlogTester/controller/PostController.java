@@ -25,7 +25,7 @@ public class PostController {
 		ModelAndView mv = new ModelAndView("posts");
 		List<Post> posts = iPostService.GetAll();
 		//mv.addObject(attributeName: "posts", posts);
-		mv.addObject("posts", posts);
+		mv.addObject("mvListPosts", posts);
 		return mv;
 	}
 	
