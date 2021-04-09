@@ -20,11 +20,13 @@
 
 		<div class="container" style="width: 60%; padding-bottom: 30px;">
 
+			<!-- breadcrumb -->
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb" style="background-color: white; padding-left: 0px;">
 					<li class="breadcrumb-item active" aria-current="page">Posts</li>
 				</ol>
 			</nav>
+			<!-- breadcrumb -->
 
 			<div class="card shadow-sm bg-white rounded" style="margin-top: 20px;" th:each="post : ${mvListPosts}">
 
@@ -35,9 +37,11 @@
 					</p>
 
 					<!-- Titulo -->
-					<a href="#"><h4 class="card-title" style="font-weight: bold; color: black; padding-top: 5px;">
-						<span th:text="${post.titulo}"></span>
-					</h4></a>
+					<a th:href="${(#mvc.url('PC#getPostById').arg(0, post.id)).build()}">
+						<h4 class="card-title" style="font-weight: bold; color: black; padding-top: 5px;">
+							<span th:text="${post.titulo}"></span>
+						</h4>
+					</a>
 					
 					<!-- texto limitado a 400 caracteres -->
 					<p class="card-text">
