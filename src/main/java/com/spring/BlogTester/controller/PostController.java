@@ -1,14 +1,19 @@
 package com.spring.BlogTester.controller;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.BlogTester.model.Post;
 import com.spring.BlogTester.service.PostService;
@@ -39,13 +44,34 @@ public class PostController {
 		return mv;
 	}
 	
+	//newpost foi redirecionado para postform.html
+	@RequestMapping(value = "/newpost", method = RequestMethod.GET)
+	public String getPostForm() {
+		return "postForm";
+	}
+	
+	@RequestMapping(value = "/newpost", method = RequestMethod.POST)
+	public String savePost(@Valid Post post, BindingResult result, RedirectAttributes attributes) {
+		
+		if (result.hasErrors()) {
+			
+			attributes.addFlashAttribute("mensagemErro", "Verifique se os campos obrigatórios foram preenchidos!");
+			
+			System.err.println("Formulário incompleto "+LocalDate.now() +" "+LocalTime.now());
+			return "redirect:/newpost";
+		}
+		post.setData(LocalDate.now());
+		iPostService.Insert(post);
+		
+		return "redirect:/posts";
+	}
 	
 	
 	
 	
-	@GetMapping(value = "/getTw")
+	@RequestMapping(value = "/getTw", method = RequestMethod.GET)
 	public String getTw() {
-		return "PISÃO!!!!";
+		return "PISÃO!!!!"; //thymeleaf acha que isso é um template
 	}
 
 }
