@@ -5,8 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
 //deixar original quando não estiver em teste
-//@SpringBootApplication
-@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
+@SpringBootApplication
+//@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 public class BlogTesterApplication {
 
 	public static void main(String[] args) {
